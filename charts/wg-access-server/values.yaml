@@ -1,0 +1,75 @@
+config:
+  vpn:
+    cidrv6: 0
+secretConfig:
+  config: {}
+  existingSecret: ''
+  secretRefKeys:
+    config: secretConfig
+web:
+  config:
+    existingSecret: ''
+    secretRefKeys:
+      adminUsername: admin
+      adminPassword: password
+    adminUsername: admin
+    adminPassword: password
+    basicAuthEnabled: true
+  service:
+    annotations: {}
+    externalTrafficPolicy: ''
+    type: ClusterIP
+    loadBalancerIP: ''
+wireguard:
+  config:
+    existingSecret: ''
+    secretRefKeys:
+      privateKey: privateKey
+    privateKey: qJvFeHHuffBaPWx4veJGQqXw6j5zdo5cSOaBd1Z0Km4=
+  service:
+    annotations: {}
+    type: NodePort
+    sessionAffinity: ClientIP
+    externalTrafficPolicy: ''
+    ipFamilyPolicy: SingleStack
+    loadBalancerIP: ''
+    externalIPs: []
+    port: 51820
+    nodePort: ''
+storage:
+  enabled: false
+  uri: ''
+  secretRefKeys:
+    uri: storageUri
+persistence:
+  enabled: true
+  existingClaim: ''
+  annotations: {}
+  accessModes:
+    - ReadWriteOnce
+  storageClass: ''
+  size: 100Mi
+initContainers: []
+ingress:
+  enabled: true
+  annotations: {}
+  ingressClassName: ''
+  hosts:
+    - vpn.domain.io
+  tls: []
+extraVolumes: ''
+extraVolumeMounts: ''
+nameOverride: ''
+fullnameOverride: ''
+imagePullSecrets: []
+image:
+  repository: bicarus/wg-access-server
+  tag: ''
+  pullPolicy: IfNotPresent
+replicas: 1
+strategy:
+  type: ''
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

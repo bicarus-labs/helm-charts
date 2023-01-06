@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: v0.8.2
+description: A Wireguard VPN Access Server
+name: wg-access-server
+version: 0.9.9
+icon: https://bicarus-labs.github.io/helm-charts/charts/wg-access-server/icon.256x256.png

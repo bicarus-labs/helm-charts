@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  wg-access-server:
+  - apiVersion: v2
+    appVersion: v0.8.2
+    created: "2023-01-08T13:58:35.476746+07:00"
+    description: A Wireguard VPN Access Server
+    digest: d664586d9e94fd965814325e9ade89f233ed5bb54cae47e7366740c81c573698
+    icon: https://bicarus-labs.github.io/helm-charts/charts/wg-access-server/icon.256x256.png
+    name: wg-access-server
+    urls:
+    - https://bicarus-labs.github.io/helm-charts/wg-access-server-0.9.9.tgz
+    version: 0.9.9
+generated: "2023-01-08T13:58:35.475854+07:00"
