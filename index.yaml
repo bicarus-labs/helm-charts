@@ -1,14 +1,25 @@
 apiVersion: v1
 entries:
+  http-debug:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-01-08T14:03:39.525905+07:00"
+    description: A Helm chart for Kubernetes
+    digest: 3d3714d5618ff24c5c8eda9d62d4a678c1daa0d645b42d823682b7ef5e1eab4d
+    name: http-debug
+    type: application
+    urls:
+    - https://bicarus-labs.github.io/helm-charts/http-debug-0.1.0.tgz
+    version: 0.1.0
   wg-access-server:
   - apiVersion: v2
     appVersion: v0.8.2
-    created: "2023-01-08T13:58:35.476746+07:00"
+    created: "2023-01-08T14:03:39.526338+07:00"
     description: A Wireguard VPN Access Server
-    digest: d664586d9e94fd965814325e9ade89f233ed5bb54cae47e7366740c81c573698
+    digest: beba9f5ef55366c8510926d66661a73dccaea4b652f41086cea9db298808afb4
     icon: https://bicarus-labs.github.io/helm-charts/charts/wg-access-server/icon.256x256.png
     name: wg-access-server
     urls:
     - https://bicarus-labs.github.io/helm-charts/wg-access-server-0.9.9.tgz
     version: 0.9.9
-generated: "2023-01-08T13:58:35.475854+07:00"
+generated: "2023-01-08T14:03:39.525183+07:00"
