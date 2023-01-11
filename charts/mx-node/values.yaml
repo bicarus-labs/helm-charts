@@ -1,0 +1,118 @@
+# Default values for mx-node.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: bicarus/elrond-rosetta
+  pullPolicy: IfNotPresent
+  tag: v1.3.50.0
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  api:
+    type: ClusterIP
+    port: 80
+    nodePort: ''
+  p2p:
+    type: NodePort
+    port: 37373
+    nodePort: 32767
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+network:
+  name: devnet # devnet | mainnet
+  chainId: D # D | 1
+shard: 0
+logLevel: "*:DEBUG"
+
+downloadNonPrunedEpochs:
+  enable: false
+  url: https://example.example.example.com/devnet
+downloadRegularArchive:
+  enable: false
+  url: https://example.example.example-example.example.com/devnet/day/archive.tar.gz
+downloadEpochFirst: 1160
+downloadEpochLast: 2824
+fullArchive: false
+
+elasticsearch:
+  enable: false
+  indexerCacheSize: 0
+  bulkRequestMaxSizeInBytes: 4194304
+  url: http://localhost:9201
+  useKibana: false
+  username:
+  password:
+
+eventNotifier:
+  enable: false
+  useAuthorization: false
+  proxyUrl: http://localhost:5000
+  username:
+  password:
+
+covalent:
+  enable: false
+  proxyUrl: localhost:21111
+  routeSendData: /block
+  routeAcknowledgeData: /acknowledge

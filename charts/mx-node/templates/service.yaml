@@ -1,0 +1,37 @@
+{{- $fullName := include "mx-node.fullname" . -}}
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $fullName }}-api
+  labels:
+    {{- include "mx-node.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.api.type }}
+  ports:
+    - port: {{ .Values.service.api.port }}
+      nodePort: {{ .Values.service.api.nodePort }}
+      targetPort: api
+      protocol: TCP
+      name: api
+  selector:
+    {{- include "mx-node.selectorLabels" . | nindent 4 }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $fullName }}-p2p
+  labels:
+    {{- include "mx-node.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.p2p.type }}
+  ports:
+    - port: {{ .Values.service.p2p.port }}
+      nodePort: {{ .Values.service.p2p.nodePort }}
+      targetPort: p2p
+      protocol: TCP
+      name: p2p
+  selector:
+    {{- include "mx-node.selectorLabels" . | nindent 4 }}

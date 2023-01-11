@@ -3,35 +3,35 @@ entries:
   http-debug:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-12T03:37:02.123707+07:00"
+    created: "2023-01-12T03:35:51.717358+07:00"
     description: A Helm chart for Kubernetes
-    digest: 55742a1fca4b91ef178fbca24a0db7758d926838c56615f5aa5420f968ec05f9
+    digest: 8a934323aa7fb118bd4487f22ca042cd7f76b83f6fb4528cd466aec33908b561
     name: http-debug
     type: application
     urls:
-    - https://bicarus-labs.github.io/helm-charts/pkgs/http-debug-0.1.0.tgz
+    - https://bicarus-labs.github.io/helm-charts/http-debug-0.1.0.tgz
     version: 0.1.0
   mx-node:
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-01-12T03:37:02.124297+07:00"
+    created: "2023-01-12T03:35:51.717985+07:00"
     description: Multiversx observer node
-    digest: 11fe371c0715fa1191ebdf00ca668aca125e304881cd1b9999c6d543e097edfb
+    digest: 539d6c0360483a6754ae1a8745d1bc7fa8298c708f4d4ac523d126e68ec0242a
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-node/icon.400x400.png
     name: mx-node
     type: application
     urls:
-    - https://bicarus-labs.github.io/helm-charts/pkgs/mx-node-0.1.0.tgz
+    - https://bicarus-labs.github.io/helm-charts/mx-node-0.1.0.tgz
     version: 0.1.0
   wg-access-server:
   - apiVersion: v2
     appVersion: v0.8.2
-    created: "2023-01-12T03:37:02.124724+07:00"
+    created: "2023-01-12T03:35:51.718473+07:00"
     description: A Wireguard VPN Access Server
-    digest: d9843cd31c9638a34f6018af65d021905ba2cd5e403416959a945c8a8abfff46
+    digest: 4d177f60476e8a731123bccbd85ed895cdd7cb5f06d432878790baa340756eb5
     icon: https://bicarus-labs.github.io/helm-charts/charts/wg-access-server/icon.256x256.png
     name: wg-access-server
     urls:
-    - https://bicarus-labs.github.io/helm-charts/pkgs/wg-access-server-0.9.9.tgz
+    - https://bicarus-labs.github.io/helm-charts/wg-access-server-0.9.9.tgz
     version: 0.9.9
-generated: "2023-01-12T03:37:02.123087+07:00"
+generated: "2023-01-12T03:35:51.716596+07:00"

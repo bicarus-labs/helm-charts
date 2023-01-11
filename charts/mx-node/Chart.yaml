@@ -1,0 +1,7 @@
+apiVersion: v2
+name: mx-node
+description: Multiversx observer node
+type: application
+version: 0.1.0
+appVersion: "1.3.50.0"
+icon: https://bicarus-labs.github.io/helm-charts/charts/mx-node/icon.400x400.png

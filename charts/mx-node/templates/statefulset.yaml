@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "mx-node.fullname" . }}
+  labels:
+    {{- include "mx-node.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  serviceName: {{ include "mx-node.fullname" . }}
+  selector:
+    matchLabels:
+      {{- include "mx-node.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mx-node.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mx-node.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - --destination-shard-as-observer={{ .Values.shard }}
+            - --log-save
+            - --log-level={{ .Values.logLevel }}
+            - --log-logger-name
+            - --rest-api-interface=0.0.0.0:8080
+            - --working-directory=/data
+            - --validator-key-pem-file=/data/observerKey.pem
+            - --serialize-snapshots
+            - --disable-consensus-watchdog
+          env:
+            - name: NETWORK
+              value: {{ .Values.network.name | quote }}
+            - name: PROGRAM
+              value: "node"
+            - name: DOWNLOAD_CHAIN_ID
+              value: {{ .Values.network.chainId | quote }}
+            - name: DOWNLOAD_NON_PRUNED_EPOCHS
+              value: {{ .Values.downloadNonPrunedEpochs.enable | quote }}
+            - name: DOWNLOAD_NON_PRUNED_EPOCHS_URL
+              value: {{ .Values.downloadNonPrunedEpochs.url | quote }}
+            - name: DOWNLOAD_REGULAR_ARCHIVE
+              value: {{ .Values.downloadRegularArchive.enable | quote }}
+            - name: DOWNLOAD_REGULAR_ARCHIVE_URL
+              value: {{ .Values.downloadRegularArchive.url | quote }}
+            - name: DOWNLOAD_EPOCH_FIRST
+              value: {{ .Values.downloadEpochFirst | quote }}
+            - name: DOWNLOAD_EPOCH_LAST
+              value: {{ .Values.downloadEpochLast | quote }}
+            - name: FULL_ARCHIVE
+              value: {{ .Values.fullArchive | quote }}
+            - name: ELASTICSEARCH_ENABLE
+              value: {{ .Values.elasticsearch.enable | quote }}
+            - name: ELASTICSEARCH_INDEXER_CACHE_SIZE
+              value: {{ .Values.elasticsearch.indexerCacheSize | quote }}
+            - name: ELASTICSEARCH_BULK_REQUEST_MAX_SIZE_IN_BYTES
+              value: {{ .Values.elasticsearch.bulkRequestMaxSizeInBytes | quote }}
+            - name: ELASTICSEARCH_URL
+              value: {{ .Values.elasticsearch.url | quote }}
+            - name: ELASTICSEARCH_USE_KIBANA
+              value: {{ .Values.elasticsearch.useKibana | quote }}
+            - name: ELASTICSEARCH_USERNAME
+              value: {{ .Values.elasticsearch.username | quote }}
+            - name: ELASTICSEARCH_PASSWORD
+              value: {{ .Values.elasticsearch.password | quote }}
+            - name: EVENT_NOTIFIER_ENABLE
+              value: {{ .Values.eventNotifier.enable | quote }}
+            - name: EVENT_NOTIFIER_USE_AUTHORIZATION
+              value: {{ .Values.eventNotifier.useAuthorization | quote }}
+            - name: EVENT_NOTIFIER_PROXY_URL
+              value: {{ .Values.eventNotifier.proxyUrl | quote }}
+            - name: EVENT_NOTIFIER_USERNAME
+              value: {{ .Values.eventNotifier.username | quote }}
+            - name: EVENT_NOTIFIER_PASSWORD
+              value: {{ .Values.eventNotifier.password | quote }}
+            - name: COVALENT_ENABLE
+              value: {{ .Values.covalent.enable | quote }}
+            - name: COVALENT_PROXY_URL
+              value: {{ .Values.covalent.proxyUrl | quote }}
+            - name: COVALENT_ROUTE_SEND_DATA
+              value: {{ .Values.covalent.routeSendData | quote }}
+            - name: COVALENT_ROUTE_ACKNOWLEDGE_DATA
+              value: {{ .Values.covalent.routeAcknowledgeData | quote }}
+          ports:
+            - name: api
+              containerPort: 8080
+              protocol: TCP
+            - name: p2p
+              containerPort: 37373
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: {{ include "mx-node.fullname" . }}-data
+              mountPath: /data
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ include "mx-node.fullname" . }}-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 500Gi
