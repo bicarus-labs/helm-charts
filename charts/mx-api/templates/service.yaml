@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mx-api.fullname" . }}
+  labels:
+    {{- include "mx-api.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port.api }}
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: {{ .Values.service.port.ws }}
+      targetPort: ws
+      protocol: TCP
+      name: ws
+  selector:
+    {{- include "mx-api.selectorLabels" . | nindent 4 }}

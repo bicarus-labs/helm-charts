@@ -1,0 +1,188 @@
+opensearch:
+  enabled: false
+  nodeSelector: {}
+  replicas: 1
+  resources:
+    limits:
+      cpu: 1
+      memory: 2Gi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  service: {}
+    # labels: {}
+    # labelsHeadless: {}
+    # headless:
+    #   annotations: {}
+    # type: NodePort
+    # nodePort: 30400
+  ingress:
+    enabled: false
+    annotations: {}
+    hosts:
+      - chart-example.local
+    tls: []
+      # - secretName: chart-example-tls
+      #   hosts:
+      #     - chart-example.local
+  config:
+    opensearch.yml: |
+      cluster.name: opensearch-cluster
+      # Bind to all interfaces because we don't know what IP address Docker will assign to us.
+      network.host: 0.0.0.0
+      # Setting network.host to a non-loopback address enables the annoying bootstrap checks. "Single-node" mode disables them again.
+      # discovery.type: single-node
+      # Start OpenSearch Security Demo Configuration
+      # WARNING: revise all the lines below before you go into production
+      plugins:
+        security:
+          disabled: true
+      ######## End OpenSearch Security Demo Configuration ########
+
+opensearch-dashboards:
+  enabled: false
+  nodeSelector: {}
+  opensearchHosts: "https://opensearch-cluster-master:9200"
+  resources:
+    limits:
+      cpu: 1
+      memory: 2Gi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  ingress:
+    enabled: false
+    annotations: {}
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            backend:
+              serviceName: ""
+              servicePort: ""
+    tls: []
+      # - secretName: chart-example-tls
+      #   hosts:
+      #     - chart-example.local
+  config:
+    opensearch_dashboards.yml: |
+      server:
+        host: 0.0.0.0
+      opensearch_security:
+        enabled: false
+        multitenancy:
+          enabled: false
+
+rabbitmq:
+  enabled: false
+  nameOverride: rabbitmq
+  replicaCount: 1
+  nodeSelector: {}
+  auth:
+    username: guest
+    password: guest
+    erlangCookie: GzEmxFMplncCY3Q57m5FoDBQxlXAOupq
+  clustering:
+    forceBoot: true
+  resources:
+    limits:
+      cpu: 2
+      memory: 5Gi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  persistence:
+    enabled: true
+    size: 2Gi
+  # service:
+  #   type: NodePort
+  #   nodePorts:
+  #     amqp: "30410"
+  #     amqpTls: "30411"
+  #     dist: "30412"
+  #     manager: "30413"
+  #     epmd: "30414"
+  #     metrics: "30415"
+
+mysql:
+  enabled: false
+  nameOverride: mysql
+  nodeSelector: &mysqlNodeSelector {}
+  auth:
+    rootPassword: root
+    database: api
+    username: root
+    password: root
+    replicationUser: replicator
+    replicationPassword: replicator
+  primary:
+    nodeSelector: *mysqlNodeSelector
+    resources:
+      limits:
+        cpu: 3
+        memory: 5Gi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+  secondary:
+    replicaCount: 2
+    nodeSelector: *mysqlNodeSelector
+    resources:
+      limits:
+        cpu: 2
+        memory: 2Gi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+redis:
+  enabled: false
+  nameOverride: redis
+  nodeSelector: &redisNodeSelector {}
+  auth:
+    enabled: false
+  master:
+    nodeSelector: *redisNodeSelector
+    resources:
+      limits:
+        cpu: 3
+        memory: 2Gi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+  replica:
+    replicaCount: 0
+    nodeSelector: *redisNodeSelector
+    resources:
+      limits:
+        cpu: 3
+        memory: 2Gi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+mongodb:
+  enabled: false
+  nameOverride: mongodb
+  architecture: standalone
+  auth:
+    enabled: true
+    rootUser: root
+    rootPassword: "password"
+    usernames:
+      - admin
+    databases:
+      - api
+  replicaCount: 1
+  nodeSelector: &mongodbNodeSelector {}
+  arbiter:
+    nodeSelector: *mongodbNodeSelector
+  hidden:
+    nodeSelector: *mongodbNodeSelector
+  resources:
+      limits:
+        cpu: 1
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 128Mi

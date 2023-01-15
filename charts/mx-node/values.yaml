@@ -99,7 +99,10 @@ elasticsearch:
   enable: false
   indexerCacheSize: 0
   bulkRequestMaxSizeInBytes: 4194304
-  url: http://localhost:9201
+  url:
+    schema: http
+    host: localhost
+    port: 9201
   useKibana: false
   username:
   password:
@@ -107,7 +110,10 @@ elasticsearch:
 eventNotifier:
   enable: false
   useAuthorization: false
-  proxyUrl: http://localhost:5000
+  proxy:
+    scheme: http
+    host: localhost
+    port: 5000
   username:
   password:
 

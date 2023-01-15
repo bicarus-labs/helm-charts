@@ -1,0 +1,13 @@
+apiVersion: v2
+name: mx-api
+description: Multiversx API
+type: application
+version: 0.1.0
+appVersion: "1.0.2-hf1"
+icon: https://bicarus-labs.github.io/helm-charts/charts/mx-api/icon.400x400.png
+dependencies:
+  - name: mx-infra
+    condition: mx-infra.enabled
+    version: 0.1.0
+    repository: file://../mx-infra
+    

@@ -1,0 +1,21 @@
+dependencies:
+- name: opensearch
+  repository: https://opensearch-project.github.io/helm-charts/
+  version: 2.9.0
+- name: opensearch-dashboards
+  repository: https://opensearch-project.github.io/helm-charts/
+  version: 2.7.0
+- name: rabbitmq
+  repository: https://charts.bitnami.com/bitnami
+  version: 11.2.2
+- name: mysql
+  repository: https://charts.bitnami.com/bitnami
+  version: 9.4.5
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 17.3.17
+- name: mongodb
+  repository: https://charts.bitnami.com/bitnami
+  version: 13.6.3
+digest: sha256:e8dedf27796b97710fd60b5c26e61c3f98971cead90034afe062d373bc4f9c62
+generated: "2023-01-16T05:03:33.567929+07:00"

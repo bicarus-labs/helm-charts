@@ -1,0 +1,6 @@
+dependencies:
+- name: mx-infra
+  repository: https://bicarus-labs.github.io/helm-charts
+  version: 0.1.0
+digest: sha256:4155175413124ec3ff336ad588d286ca3480b38b899f5515c20d88a708938c32
+generated: "2023-01-16T05:22:24.489118+07:00"

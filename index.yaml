@@ -3,20 +3,74 @@ entries:
   http-debug:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-12T03:37:02.123707+07:00"
+    created: "2023-01-16T06:58:13.991174+07:00"
     description: A Helm chart for Kubernetes
-    digest: 55742a1fca4b91ef178fbca24a0db7758d926838c56615f5aa5420f968ec05f9
+    digest: 98f03668a343da72de0d6dd1c66c5905e0672ab02bfc15731ed6802101c12b21
     name: http-debug
     type: application
     urls:
     - https://bicarus-labs.github.io/helm-charts/pkgs/http-debug-0.1.0.tgz
     version: 0.1.0
+  mx-api:
+  - apiVersion: v2
+    appVersion: 1.0.2-hf1
+    created: "2023-01-16T06:58:14.004747+07:00"
+    dependencies:
+    - condition: mx-infra.enabled
+      name: mx-infra
+      repository: file://../mx-infra
+      version: 0.1.0
+    description: Multiversx API
+    digest: 3cd64e614023ba4df2a6b991e47c9bf4df587871048765c13a049c8be932a54e
+    icon: https://bicarus-labs.github.io/helm-charts/charts/mx-api/icon.400x400.png
+    name: mx-api
+    type: application
+    urls:
+    - https://bicarus-labs.github.io/helm-charts/pkgs/mx-api-0.1.0.tgz
+    version: 0.1.0
+  mx-infra:
+  - apiVersion: v2
+    appVersion: 1.3.50.0
+    created: "2023-01-16T06:58:14.016796+07:00"
+    dependencies:
+    - condition: opensearch.enabled
+      name: opensearch
+      repository: https://opensearch-project.github.io/helm-charts/
+      version: 2.9.0
+    - condition: opensearch-dashboards.enabled
+      name: opensearch-dashboards
+      repository: https://opensearch-project.github.io/helm-charts/
+      version: 2.7.0
+    - condition: rabbitmq.enabled
+      name: rabbitmq
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.2.2
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 9.4.5
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.3.17
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: 13.6.3
+    description: Infra for mx
+    digest: d54e6f08797d41f4121f359174d08b420d91c8b63df2a8f5e856be32c04f8168
+    icon: https://bicarus-labs.github.io/helm-charts/charts/mx-infra/icon.400x400.png
+    name: mx-infra
+    type: application
+    urls:
+    - https://bicarus-labs.github.io/helm-charts/pkgs/mx-infra-0.1.0.tgz
+    version: 0.1.0
   mx-node:
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-01-12T03:37:02.124297+07:00"
+    created: "2023-01-16T06:58:14.017361+07:00"
     description: Multiversx observer node
-    digest: 11fe371c0715fa1191ebdf00ca668aca125e304881cd1b9999c6d543e097edfb
+    digest: 9c93ec44527c283d9887c182aa9ab94060f1eea013877e21dbd30f3261f9d9b1
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-node/icon.400x400.png
     name: mx-node
     type: application
@@ -26,12 +80,12 @@ entries:
   wg-access-server:
   - apiVersion: v2
     appVersion: v0.8.2
-    created: "2023-01-12T03:37:02.124724+07:00"
+    created: "2023-01-16T06:58:14.017769+07:00"
     description: A Wireguard VPN Access Server
-    digest: d9843cd31c9638a34f6018af65d021905ba2cd5e403416959a945c8a8abfff46
+    digest: 87b8d0aafa8210377a7e0bf05b0271546236e840c8ce0c2195f6148945d7a5c9
     icon: https://bicarus-labs.github.io/helm-charts/charts/wg-access-server/icon.256x256.png
     name: wg-access-server
     urls:
     - https://bicarus-labs.github.io/helm-charts/pkgs/wg-access-server-0.9.9.tgz
     version: 0.9.9
-generated: "2023-01-12T03:37:02.123087+07:00"
+generated: "2023-01-16T06:58:13.990455+07:00"

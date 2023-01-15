@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mx-api.fullname" . }}
+  labels:
+    {{- include "mx-api.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "mx-api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mx-api.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mx-api.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+            - name: ws
+              containerPort: 3099
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: NETWORK
+              value: {{ .Values.network | quote }}
+            - name: ELASTICSEARCH_URLS
+              value: {{ .Values.network | quote }}
+            - name: GATEWAY_URLS
+              value: {{ range $index, $gatewayUrl := .Values.gatewayUrls }}{{ if ne $index 0 }},{{ end }}{{ $gatewayUrl }}{{ end }}
+            - name: RABBITMQ_HOST
+              value: {{ .Values.external.rabbitmq.host | quote }}
+            - name: RABBITMQ_PORT
+              value: {{ .Values.external.rabbitmq.port | quote }}
+            - name: RABBITMQ_USER
+              value: {{ .Values.external.rabbitmq.user | quote }}
+            - name: RABBITMQ_PASS
+              value: {{ .Values.external.rabbitmq.pass | quote }}
+            - name: REDIS_HOST
+              value: {{ if .Values.external.redis.enabled }}{{ .Values.external.redis.host }}{{ else }}{{ printf "%s-redis" .Release.Name | quote }}{{ end }}
+            - name: REDIS_PORT
+              value: {{ if .Values.external.redis.enabled }}{{ .Values.external.redis.port }}{{ else }}"6379"{{ end }}
+            - name: DATABASE_ENABLE
+              value: {{ .Values.databaseEnable | quote }}
+            - name: MONGO_HOST
+              value: {{ if .Values.external.mongodb.enabled }}{{ .Values.external.mongodb.host }}{{ else }}{{ printf "%s-mongodb" .Release.Name | quote }}{{ end }}
+            - name: MONGO_PORT
+              value: {{ if .Values.external.mongodb.enabled }}{{ .Values.external.mongodb.port }}{{ else }}"27017"{{ end }}
+            - name: MONGO_USER
+              value: {{ .Values.external.mongodb.user }}
+            - name: MONGO_PASS
+              value: {{ .Values.external.mongodb.pass }}
+            - name: MONGO_DBNAME
+              value: {{ .Values.external.mongodb.dbname }}
+            - name: MYSQL_HOST
+              value: {{ if .Values.external.mysql.enabled }}{{ .Values.external.mysql.host }}{{ else }}{{ printf "%s-mysql" .Release.Name | quote }}{{ end }}
+            - name: MYSQL_PORT
+              value: {{ if .Values.external.mysql.enabled }}{{ .Values.external.mysql.port }}{{ else }}"3306"{{ end }}
+            - name: MYSQL_USER
+              value: {{ .Values.external.mysql.user | quote }}
+            - name: MYSQL_PASS
+              value: {{ .Values.external.mysql.pass | quote }}
+            - name: MYSQL_DBNAME
+              value: {{ .Values.external.mysql.dbname | quote }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

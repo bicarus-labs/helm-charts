@@ -70,7 +70,7 @@ spec:
             - name: ELASTICSEARCH_BULK_REQUEST_MAX_SIZE_IN_BYTES
               value: {{ .Values.elasticsearch.bulkRequestMaxSizeInBytes | quote }}
             - name: ELASTICSEARCH_URL
-              value: {{ .Values.elasticsearch.url | quote }}
+              value: {{ .Values.elasticsearch.url.schema }}://{{ .Values.elasticsearch.url.host }}:{{ .Values.elasticsearch.url.port }}
             - name: ELASTICSEARCH_USE_KIBANA
               value: {{ .Values.elasticsearch.useKibana | quote }}
             - name: ELASTICSEARCH_USERNAME
@@ -82,7 +82,7 @@ spec:
             - name: EVENT_NOTIFIER_USE_AUTHORIZATION
               value: {{ .Values.eventNotifier.useAuthorization | quote }}
             - name: EVENT_NOTIFIER_PROXY_URL
-              value: {{ .Values.eventNotifier.proxyUrl | quote }}
+              value: {{ .Values.eventNotifier.proxy.scheme }}://{{ .Values.eventNotifier.proxy.host }}:{{ .Values.eventNotifier.proxy.port }}
             - name: EVENT_NOTIFIER_USERNAME
               value: {{ .Values.eventNotifier.username | quote }}
             - name: EVENT_NOTIFIER_PASSWORD
