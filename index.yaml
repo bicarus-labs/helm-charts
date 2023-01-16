@@ -3,9 +3,9 @@ entries:
   http-debug:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-01-16T06:58:13.991174+07:00"
+    created: "2023-01-16T08:52:56.907074+07:00"
     description: A Helm chart for Kubernetes
-    digest: 98f03668a343da72de0d6dd1c66c5905e0672ab02bfc15731ed6802101c12b21
+    digest: d03bb6200310b93e7838c7f17bc94477667586e2e77552462cc4467c3149fcba
     name: http-debug
     type: application
     urls:
@@ -14,14 +14,14 @@ entries:
   mx-api:
   - apiVersion: v2
     appVersion: 1.0.2-hf1
-    created: "2023-01-16T06:58:14.004747+07:00"
+    created: "2023-01-16T08:52:56.920774+07:00"
     dependencies:
     - condition: mx-infra.enabled
       name: mx-infra
       repository: file://../mx-infra
       version: 0.1.0
     description: Multiversx API
-    digest: 3cd64e614023ba4df2a6b991e47c9bf4df587871048765c13a049c8be932a54e
+    digest: ed48965589c809f8fd0706464d7e83303f80ad952e10096805963664565edfb2
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-api/icon.400x400.png
     name: mx-api
     type: application
@@ -31,7 +31,7 @@ entries:
   mx-infra:
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-01-16T06:58:14.016796+07:00"
+    created: "2023-01-16T08:52:56.933068+07:00"
     dependencies:
     - condition: opensearch.enabled
       name: opensearch
@@ -58,7 +58,7 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 13.6.3
     description: Infra for mx
-    digest: d54e6f08797d41f4121f359174d08b420d91c8b63df2a8f5e856be32c04f8168
+    digest: 4d66d9d936a62124ed99c80afd9f36a0b4c43c59a3722d6ea39c20956f2c6c91
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-infra/icon.400x400.png
     name: mx-infra
     type: application
@@ -68,9 +68,9 @@ entries:
   mx-node:
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-01-16T06:58:14.017361+07:00"
+    created: "2023-01-16T08:52:56.93362+07:00"
     description: Multiversx observer node
-    digest: 9c93ec44527c283d9887c182aa9ab94060f1eea013877e21dbd30f3261f9d9b1
+    digest: bde880c8d99001aadfb83cab6617998051a68598ce7b186d3aaa60f62b08e0cf
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-node/icon.400x400.png
     name: mx-node
     type: application
@@ -80,12 +80,12 @@ entries:
   wg-access-server:
   - apiVersion: v2
     appVersion: v0.8.2
-    created: "2023-01-16T06:58:14.017769+07:00"
+    created: "2023-01-16T08:52:56.934422+07:00"
     description: A Wireguard VPN Access Server
-    digest: 87b8d0aafa8210377a7e0bf05b0271546236e840c8ce0c2195f6148945d7a5c9
+    digest: 0799d16419e28e3bbd861d7169c3bf2c37137246ed1734c5a73caa0745402ca3
     icon: https://bicarus-labs.github.io/helm-charts/charts/wg-access-server/icon.256x256.png
     name: wg-access-server
     urls:
     - https://bicarus-labs.github.io/helm-charts/pkgs/wg-access-server-0.9.9.tgz
     version: 0.9.9
-generated: "2023-01-16T06:58:13.990455+07:00"
+generated: "2023-01-16T08:52:56.906468+07:00"

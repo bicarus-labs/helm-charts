@@ -54,7 +54,7 @@ spec:
             - name: NETWORK
               value: {{ .Values.network | quote }}
             - name: ELASTICSEARCH_URLS
-              value: {{ .Values.network | quote }}
+              value: {{ range $index, $elasticsearchUrl := .Values.elasticsearchUrls }}{{ if ne $index 0 }},{{ end }}{{ $elasticsearchUrl }}{{ end }}
             - name: GATEWAY_URLS
               value: {{ range $index, $gatewayUrl := .Values.gatewayUrls }}{{ if ne $index 0 }},{{ end }}{{ $gatewayUrl }}{{ end }}
             - name: RABBITMQ_HOST
@@ -66,7 +66,7 @@ spec:
             - name: RABBITMQ_PASS
               value: {{ .Values.external.rabbitmq.pass | quote }}
             - name: REDIS_HOST
-              value: {{ if .Values.external.redis.enabled }}{{ .Values.external.redis.host }}{{ else }}{{ printf "%s-redis" .Release.Name | quote }}{{ end }}
+              value: {{ if .Values.external.redis.enabled }}{{ .Values.external.redis.host }}{{ else }}{{ printf "%s-redis-headless" .Release.Name | quote }}{{ end }}
             - name: REDIS_PORT
               value: {{ if .Values.external.redis.enabled }}{{ .Values.external.redis.port }}{{ else }}"6379"{{ end }}
             - name: DATABASE_ENABLE

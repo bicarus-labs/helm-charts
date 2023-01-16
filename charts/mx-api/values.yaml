@@ -9,16 +9,16 @@ external:
     enabled: false
     host:
     port:
-    user: root
-    pass: root
-    dbname: api
+    user: &mysqlUser 'root'
+    pass: &mysqlPass 'root'
+    dbname: &mysqlDbname 'api'
   mongodb:
     enabled: false
     host:
     port:
-    user: root
-    pass: password
-    dbname: api
+    user: &mongodbUser 'admin'
+    pass: &mongodbPass 'password'
+    dbname: &mongodbDbname 'api'
   redis:
     enabled: false
     host:
@@ -122,25 +122,92 @@ tolerations: []
 
 affinity: {}
 
-mysql:
-  enabled: "{{ and .Values.databaseEnable (not .Values.external.mysql.enabled) }}"
-mongodb:
-  enabled: "{{ and .Values.databaseEnable (not .Values.external.mongodb.enabled) }}"
-redis:
-  enabled: "{{ not .Values.external.redis.enabled }}"
-
 mx-infra:
   mysql:
+    enabled: true
+    nameOverride: mysql
+    nodeSelector: &mysqlNodeSelector {}
+    serviceAccount:
+      create: false
     auth:
-      username: "{{ .Values.external.mysql.user }}"
-      password: "{{ .Values.external.mysql.pass }}"
-      database: "{{ .Values.external.mysql.dbname }}"
+      rootPassword: root
+      username: *mysqlUser
+      password: *mysqlPass
+      database: *mysqlDbname
+      replicationUser: replicator
+      replicationPassword: replicator
+    primary:
+      nodeSelector: *mysqlNodeSelector
+      resources:
+        limits:
+          cpu: 3
+          memory: 5Gi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+    secondary:
+      replicaCount: 2
+      nodeSelector: *mysqlNodeSelector
+      resources:
+        limits:
+          cpu: 2
+          memory: 2Gi
+        requests:
+          cpu: 100m
+          memory: 128Mi
   mongodb:
+    enabled: true
+    nameOverride: mongodb
+    serviceAccount:
+      create: false
+    architecture: standalone
     auth:
-      rootUser: "{{ .Values.external.mongodb.user }}"
-      rootPassword: "{{ .Values.external.mongodb.pass }}"
+      enabled: true
+      rootUser: root
+      rootPassword: *mongodbPass
       usernames:
-        - admin
+        - *mongodbUser
+      passwords:
+        - *mongodbPass
       databases:
-        - "{{ .Values.external.mongodb.dbname }}"
+        - *mongodbDbname
+    replicaCount: 1
+    nodeSelector: &mongodbNodeSelector {}
+    arbiter:
+      nodeSelector: *mongodbNodeSelector
+    hidden:
+      nodeSelector: *mongodbNodeSelector
+    resources:
+        limits:
+          cpu: 1
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 128Mi
   redis:
+    enabled: true
+    nameOverride: redis
+    nodeSelector: &redisNodeSelector {}
+    serviceAccount:
+      create: false
+    auth:
+      enabled: false
+    master:
+      nodeSelector: *redisNodeSelector
+      resources:
+        limits:
+          cpu: 3
+          memory: 2Gi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+    replica:
+      replicaCount: 0
+      nodeSelector: *redisNodeSelector
+      resources:
+        limits:
+          cpu: 3
+          memory: 2Gi
+        requests:
+          cpu: 100m
+          memory: 128Mi
