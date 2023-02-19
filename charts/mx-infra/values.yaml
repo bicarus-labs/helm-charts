@@ -196,3 +196,16 @@ mongodb:
       requests:
         cpu: 100m
         memory: 128Mi
+
+mx-notifier:
+  enabled: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    db: 1
+
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    user: guest
+    pass: guest
