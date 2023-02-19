@@ -19,6 +19,6 @@ dependencies:
   version: 13.6.3
 - name: mx-notifier
   repository: file://../mx-notifier
-  version: 1.1.8
-digest: sha256:b3e9b105eb863099304af443de739dcf0e5067d1052ea4ee25c913e1e8fe19f0
-generated: "2023-02-20T01:04:44.772961+07:00"
+  version: 1.1.9
+digest: sha256:e4d2b486200ec61630a81d376a7549f3f0003776eed019c2c97bd75b1ab0c8df
+generated: "2023-02-20T01:25:35.742935+07:00"

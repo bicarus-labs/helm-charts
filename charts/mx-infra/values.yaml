@@ -199,6 +199,9 @@ mongodb:
 
 mx-notifier:
   enabled: false
+  # service:
+  #   type: NodePort
+  #   nodePort: 30400
   redis:
     host: 127.0.0.1
     port: 6379
