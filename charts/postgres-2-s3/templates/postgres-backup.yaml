@@ -1,0 +1,56 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "postgres-2-s3.fullname" . }}
+spec:
+  schedule: {{ .Values.jobSchedule | quote }}
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      template:
+        spec:
+          initContainers:
+            - name: dump
+              image: postgres:11.13-alpine
+              volumeMounts:
+                - name: data
+                  mountPath: /backup
+              args:
+                - pg_dump
+                - "-Fc"
+                - "-f"
+                - "/backup/bk-postgres.pgdump"
+                - "-Z"
+                - "9"
+                - "-v"
+                - "-h"
+                - {{ .Values.postgresql.host | quote }}
+                - "-p"
+                - {{ .Values.postgresql.port | quote }}
+                - "-U"
+                - {{ .Values.postgresql.user | quote }}
+                - "-d"
+                - {{ .Values.postgresql.dbname | quote }}
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      key:  postgresql-password
+                      name: ashswap-postgresql-secret
+          containers:
+            - name: save
+              image: amazon/aws-cli:2.11.3
+              volumeMounts:
+                - name: data
+                  mountPath: /backup
+              command: ['/bin/sh']
+              args:
+                - -c
+                - "aws --endpoint-url {{ .Values.s3.endpoint }} s3 cp /backup/bk-postgres.pgdump s3://{{ .Values.s3.bucket }}/ashswap-postgres-$(date +'%y-%m-%d-%H-%M-00').pgdump"
+              envFrom:
+                - secretRef:
+                    name: {{ include "postgres-2-s3.fullname" . }}-s3-secret
+          restartPolicy: Never
+          volumes:
+            - name: data
+              emptyDir: {}

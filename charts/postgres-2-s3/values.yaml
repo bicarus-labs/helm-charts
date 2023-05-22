@@ -1,0 +1,12 @@
+jobSchedule: "0 */12 * * *"
+postgresql:
+  host: 127.0.0.1
+  port: 123
+  user: postgres
+  dbname: ash_swap
+s3:
+  endpoint: https://minio-internal.bicarus.io
+  bucket: ashswap-mainnet
+  accessKeyId: "minio"
+  secretAccessKey: "minio"
+  region: "us-east-1"

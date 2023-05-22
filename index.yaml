@@ -3,9 +3,9 @@ entries:
   http-debug:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-20T01:28:38.506196+07:00"
+    created: "2023-05-23T00:02:48.501604+07:00"
     description: A Helm chart for Kubernetes
-    digest: 8ada011b03bad1637c326f8d710d2b70284ced36a5f8f7310539be70ab17f1a7
+    digest: e5de45b2edde19033c003032f43a7bb4282d023677d317ce835b85fabd68b8fd
     name: http-debug
     type: application
     urls:
@@ -14,14 +14,14 @@ entries:
   mx-api:
   - apiVersion: v2
     appVersion: 1.0.2-hf1
-    created: "2023-02-20T01:28:38.518314+07:00"
+    created: "2023-05-23T00:02:48.514762+07:00"
     dependencies:
     - condition: mx-infra.enabled
       name: mx-infra
       repository: file://../mx-infra
       version: 0.1.0
     description: Multiversx API
-    digest: a6a7ca0be8802c52bd1a050993d82e3090999721dec09ce02c9fcfb735b60d84
+    digest: 354a9648e0c3fbbc3b19aeb619932cd912b865f6f79856b27bd05fcf12a22c91
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-api/icon.400x400.png
     name: mx-api
     type: application
@@ -31,7 +31,7 @@ entries:
   mx-infra:
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-02-20T01:28:38.554016+07:00"
+    created: "2023-05-23T00:02:48.55123+07:00"
     dependencies:
     - condition: opensearch.enabled
       name: opensearch
@@ -62,7 +62,7 @@ entries:
       repository: file://../mx-notifier
       version: 1.1.9
     description: Infra for mx
-    digest: 27d52057ce7c76ec86e70ef7028a82aa011ed000bccc531e779e627122dc7327
+    digest: 54e8aca339701bfeaf0ae8d5eacea9f7f764b32284436fd228b21c83f18018d2
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-infra/icon.400x400.png
     name: mx-infra
     type: application
@@ -71,7 +71,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-02-20T01:28:38.542646+07:00"
+    created: "2023-05-23T00:02:48.540101+07:00"
     dependencies:
     - condition: opensearch.enabled
       name: opensearch
@@ -111,7 +111,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-02-20T01:28:38.530337+07:00"
+    created: "2023-05-23T00:02:48.526638+07:00"
     dependencies:
     - condition: opensearch.enabled
       name: opensearch
@@ -148,9 +148,9 @@ entries:
   mx-node:
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-02-20T01:28:38.554511+07:00"
+    created: "2023-05-23T00:02:48.551703+07:00"
     description: Multiversx observer node
-    digest: 931719d796dcccf6b6abc9693cbb232189fb0ed0fd335ab96d7c34eafeac7ba8
+    digest: 8e23e851106ac85af38567e62937c7be71e3aa1afa59d69158ee9fcf764e07ca
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-node/icon.400x400.png
     name: mx-node
     type: application
@@ -160,9 +160,9 @@ entries:
   mx-notifier:
   - apiVersion: v2
     appVersion: 1.1.8
-    created: "2023-02-20T01:28:38.555169+07:00"
+    created: "2023-05-23T00:02:48.552377+07:00"
     description: Multiversx notifier
-    digest: 985c6f69d53580a8e4f960da6603d5b0c5827417cc22661824417e02f98f364d
+    digest: 59d143e64a49e195a7c066049c6ca81d72a877f4ef63ed78294bc875acbeee64
     name: mx-notifier
     type: application
     urls:
@@ -170,7 +170,7 @@ entries:
     version: 1.1.9
   - apiVersion: v2
     appVersion: 1.1.8
-    created: "2023-02-20T01:28:38.554932+07:00"
+    created: "2023-05-23T00:02:48.552152+07:00"
     description: Multiversx notifier
     digest: 6a3c31810105d498a8cae0b3c12c9218cf4c8954409a09ad53275d2745d29507
     name: mx-notifier
@@ -178,15 +178,26 @@ entries:
     urls:
     - https://bicarus-labs.github.io/helm-charts/pkgs/mx-notifier-1.1.8.tgz
     version: 1.1.8
+  postgres-2-s3:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-23T00:02:48.552485+07:00"
+    description: A Helm chart for Kubernetes
+    digest: f0bf0edd20e7a39fbe9497c676cbf4b2806e46cf86cbd0d596fce3da26076465
+    name: postgres-2-s3
+    type: application
+    urls:
+    - https://bicarus-labs.github.io/helm-charts/pkgs/postgres-2-s3-0.1.0.tgz
+    version: 0.1.0
   wg-access-server:
   - apiVersion: v2
     appVersion: v0.8.2
-    created: "2023-02-20T01:28:38.555532+07:00"
+    created: "2023-05-23T00:02:48.55284+07:00"
     description: A Wireguard VPN Access Server
-    digest: a9274f3e4d425291fd4a800ad9c24d5fe8fb8e8318162b593a4be437f0de33e3
+    digest: fd936730b2717fd4860319d9a5ab49dd7882b5e350bc7cb92f8c7f983e4a2cf6
     icon: https://bicarus-labs.github.io/helm-charts/charts/wg-access-server/icon.256x256.png
     name: wg-access-server
     urls:
     - https://bicarus-labs.github.io/helm-charts/pkgs/wg-access-server-0.9.9.tgz
     version: 0.9.9
-generated: "2023-02-20T01:28:38.505466+07:00"
+generated: "2023-05-23T00:02:48.50083+07:00"
