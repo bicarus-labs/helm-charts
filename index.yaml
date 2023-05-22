@@ -3,9 +3,9 @@ entries:
   http-debug:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-05-23T00:10:28.014156+07:00"
+    created: "2023-05-23T00:33:50.339728+07:00"
     description: A Helm chart for Kubernetes
-    digest: aa2fbcde70ae6cc6fd17fa64c00afddd99fd84a8d5d3c0b84516392ef681f54a
+    digest: 3319b70839797f5bc47839d61a02c7a700675c3093b9c1d305af51098f70c5d7
     name: http-debug
     type: application
     urls:
@@ -14,14 +14,14 @@ entries:
   mx-api:
   - apiVersion: v2
     appVersion: 1.0.2-hf1
-    created: "2023-05-23T00:10:28.027198+07:00"
+    created: "2023-05-23T00:33:50.352977+07:00"
     dependencies:
     - condition: mx-infra.enabled
       name: mx-infra
       repository: file://../mx-infra
       version: 0.1.0
     description: Multiversx API
-    digest: 836acd8f492ba8d5476ad938bfebcbc79ac8744850ac93cf061a0699bd6bc9fe
+    digest: cc7a6c4a8cf0f81b8e815e3784fdf936352f1782ab02598c2219519fe96da862
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-api/icon.400x400.png
     name: mx-api
     type: application
@@ -31,7 +31,7 @@ entries:
   mx-infra:
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-05-23T00:10:28.06394+07:00"
+    created: "2023-05-23T00:33:50.388591+07:00"
     dependencies:
     - condition: opensearch.enabled
       name: opensearch
@@ -62,7 +62,7 @@ entries:
       repository: file://../mx-notifier
       version: 1.1.9
     description: Infra for mx
-    digest: 097336fd75517e30fcd27a5eaa3041f82288d2872727669ebbc76a943c2070d2
+    digest: 4dfcb486f7216c55bd8e8f613ef638c800dca2f881c8e1a8ab4f129114fba52b
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-infra/icon.400x400.png
     name: mx-infra
     type: application
@@ -71,7 +71,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-05-23T00:10:28.052131+07:00"
+    created: "2023-05-23T00:33:50.376453+07:00"
     dependencies:
     - condition: opensearch.enabled
       name: opensearch
@@ -111,7 +111,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-05-23T00:10:28.039437+07:00"
+    created: "2023-05-23T00:33:50.364677+07:00"
     dependencies:
     - condition: opensearch.enabled
       name: opensearch
@@ -148,9 +148,9 @@ entries:
   mx-node:
   - apiVersion: v2
     appVersion: 1.3.50.0
-    created: "2023-05-23T00:10:28.06447+07:00"
+    created: "2023-05-23T00:33:50.389088+07:00"
     description: Multiversx observer node
-    digest: 9d5adcec418fd23dbf7abb506c06456c9d5337c348697360ea919b54d0be32e8
+    digest: b726489c2be67fe2e3d47eb6ce01e44d254becbc6c382be4384c0e21debc784d
     icon: https://bicarus-labs.github.io/helm-charts/charts/mx-node/icon.400x400.png
     name: mx-node
     type: application
@@ -160,9 +160,9 @@ entries:
   mx-notifier:
   - apiVersion: v2
     appVersion: 1.1.8
-    created: "2023-05-23T00:10:28.065113+07:00"
+    created: "2023-05-23T00:33:50.389788+07:00"
     description: Multiversx notifier
-    digest: 33127b976599e2f2dc2086f4eb96204481ee4dc715b7314cee0940b4465fd34b
+    digest: 646d8071e547d00b16a6174e0f5f14d00868c482ebae8d514ea92ae55bebacf5
     name: mx-notifier
     type: application
     urls:
@@ -170,7 +170,7 @@ entries:
     version: 1.1.9
   - apiVersion: v2
     appVersion: 1.1.8
-    created: "2023-05-23T00:10:28.06489+07:00"
+    created: "2023-05-23T00:33:50.389552+07:00"
     description: Multiversx notifier
     digest: 6a3c31810105d498a8cae0b3c12c9218cf4c8954409a09ad53275d2745d29507
     name: mx-notifier
@@ -181,7 +181,17 @@ entries:
   postgres-2-s3:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-05-23T00:10:28.065617+07:00"
+    created: "2023-05-23T00:33:50.390668+07:00"
+    description: Cronjob to backup Postgres to S3
+    digest: 07a772305be092adce28c97ef06dc8850efc8ae16461d2c66caefcf8a25afc0f
+    name: postgres-2-s3
+    type: application
+    urls:
+    - https://bicarus-labs.github.io/helm-charts/pkgs/postgres-2-s3-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-23T00:33:50.390559+07:00"
     description: Cronjob to backup Postgres to S3
     digest: ad3dffdf59afcbff6601d0ce9b767f98f6757a16b9269cb9c79b2ca2b3090e3e
     name: postgres-2-s3
@@ -191,7 +201,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-05-23T00:10:28.065501+07:00"
+    created: "2023-05-23T00:33:50.390207+07:00"
     description: A Helm chart for Kubernetes
     digest: f0bf0edd20e7a39fbe9497c676cbf4b2806e46cf86cbd0d596fce3da26076465
     name: postgres-2-s3
@@ -202,12 +212,12 @@ entries:
   wg-access-server:
   - apiVersion: v2
     appVersion: v0.8.2
-    created: "2023-05-23T00:10:28.066009+07:00"
+    created: "2023-05-23T00:33:50.39103+07:00"
     description: A Wireguard VPN Access Server
-    digest: 08d85e27b67f43225898e1c6a14cad587a47f8b85f38bf0f94447b5f358d075c
+    digest: b713a39258d1511afd5561115df143908391e29b86fe6df3537f2639e9ca91c9
     icon: https://bicarus-labs.github.io/helm-charts/charts/wg-access-server/icon.256x256.png
     name: wg-access-server
     urls:
     - https://bicarus-labs.github.io/helm-charts/pkgs/wg-access-server-0.9.9.tgz
     version: 0.9.9
-generated: "2023-05-23T00:10:28.013368+07:00"
+generated: "2023-05-23T00:33:50.33897+07:00"
