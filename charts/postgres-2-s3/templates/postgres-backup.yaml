@@ -33,10 +33,7 @@ spec:
                 - {{ .Values.postgresql.dbname | quote }}
               env:
                 - name: PGPASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      key:  postgresql-password
-                      name: ashswap-postgresql-secret
+                  value: {{ .Values.postgresql.pass }}
           containers:
             - name: save
               image: amazon/aws-cli:2.11.3
